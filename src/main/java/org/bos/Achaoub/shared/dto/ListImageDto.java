@@ -1,9 +1,7 @@
 package org.bos.Achaoub.shared.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
-import org.bos.Achaoub.entities.ImageEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -4,12 +4,8 @@ import java.util.ArrayList;
 
 
 import org.bos.Achaoub.entities.ImageEntity;
-import org.bos.Achaoub.entities.UserEntity;
-import org.bos.Achaoub.models.responces.UserResponse;
 import org.bos.Achaoub.services.ImageService;
 import org.bos.Achaoub.shared.dto.ImageDto;
-import org.bos.Achaoub.shared.dto.ListImageDto;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;

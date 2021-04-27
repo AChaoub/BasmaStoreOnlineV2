@@ -1,8 +1,6 @@
 package org.bos.Achaoub.shared.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

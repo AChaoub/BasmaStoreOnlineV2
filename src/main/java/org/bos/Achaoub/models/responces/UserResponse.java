@@ -9,28 +9,10 @@ public @Data class UserResponse {
 	private String nom;
 	private String prenom;
 	private String email;
-	private boolean verificationEmail;
+	private boolean emailVerificationStatus;
 	private String role;
 
 	public UserResponse() {
 
 	}
-
-//	public UserResponse(String nom, String prenom ,String email,String userId,String role,boolean verif) {
-//		this.nom = nom;
-//		this.prenom=prenom;
-//		this.email = email;
-//		this.userId  = userId;
-//		this.role = role;
-//		this.verificationEmail=verif;
-//	}
-//	public UserResponse(String nom, String prenom ,String email,String userId,String role) {
-//		this.nom = nom;
-//		this.prenom=prenom;
-//		this.email = email;
-//		this.userId  = userId;
-//		this.role = role;
-//		this.verificationEmail=false;
-//	}
-
 }

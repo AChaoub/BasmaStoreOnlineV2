@@ -10,7 +10,7 @@ import org.bos.Achaoub.shared.dto.UserDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +24,8 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+	
+	
 
 	@Autowired
 	UserService userService;
@@ -45,6 +47,7 @@ public class UserController {
 
 		UserDto userDto = new UserDto();
 		BeanUtils.copyProperties(user, userDto);
+		
 
 		UserDto createUser = userService.createUser(userDto);
 
@@ -89,28 +92,26 @@ public class UserController {
 		return listR;
 	}
 
-	
 
-	//@PreAuthorize("hasRole('Administrateur')")
-	//@PreAuthorize("hasAuthority('0')")
+	@Secured(value = "Administrateur")
 	@GetMapping(value = "/Valid/{id}")
 	public UserResponse validClientById(@PathVariable String id) {
-
 		UserDto client = userService.getUserByUserId(id);
 		
-		//UserDto clientVerified =new UserDto();
-		
-		if(client!=null) {
+		if (client != null) {
 			if ((client.getEmailVerificationStatus() == false) && (client.getRole().equals("Client"))) {
 				client = userService.updateEmailVerifUser(id);
-				//client.setEmailVerificationStatus(true);
-				
-			}else
+			} else if (client.getRole().equals("Administrateur")) {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST.value(), "this user is an Admin", null);
+			}
+			else  {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST.value(), "this user already verified", null);
-
-		}else
+			}
+		} else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST.value(), "User Not Found!!!", null);
-		
+		}
+
+
 		UserResponse userResponse = new UserResponse();
 		BeanUtils.copyProperties(client, userResponse);
 		return userResponse;
